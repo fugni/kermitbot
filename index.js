@@ -23,9 +23,10 @@ client.on("messageCreate", (message) => {
 
     if (message.content.startsWith("!")) {
         const args = message.content.split(/ (.*)/s);
-        console.log(args);
+        //args[0] = command
+        //args[1] = anything after command
 
-        switch (args[0]) {
+        switch (args[0].toLowerCase()) {
             case "!info":
                 message.channel.send("ip = **" + process.env.MC_SERVER_IP + "**\nversion = **1.21**");
                 break;
