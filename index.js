@@ -21,16 +21,33 @@ client.on("guildMemberAdd", (member) => {
 client.on("messageCreate", (message) => {
     // if (message.author.bot) return;
 
-    switch (message.content) {
-        case "!info":
-            message.channel.send("ip = **" + process.env.MC_SERVER_IP + "**\nversion = **1.21**");
-            break;
-        case "!gay":
-            message.channel.send("no u");
-            break;
+    if (message.content.startsWith("!")) {
+        const args = message.content.split(/ (.*)/s);
+        console.log(args);
 
-        default:
-            break;
+        switch (args[0]) {
+            case "!info":
+                message.channel.send("ip = **" + process.env.MC_SERVER_IP + "**\nversion = **1.21**");
+                break;
+            case "!gay":
+                if (args.length > 1) {
+                    const mentionedUser = message.mentions.users.first();
+                    if (mentionedUser) {
+                        const mentionedMember = message.guild.members.cache.get(mentionedUser.id);
+                        if (mentionedMember) {
+                            message.channel.send(mentionedMember.displayName + " is gay");
+                        }
+                    } else {
+                        message.channel.send(args[1] + " is gay");
+                    }
+                } else {
+                    message.channel.send(message.author.displayName + " is gay");
+                }
+                break;
+            default:
+                break;
+        }
+
     }
 });
 
