@@ -28,7 +28,7 @@ client.on("messageCreate", (message) => {
 
         switch (args[0].toLowerCase()) {
             case "!info":
-                message.channel.send("ip = **" + process.env.MC_SERVER_IP + "**\nversion = **1.21**");
+                message.channel.send("ip = **" + process.env.MC_SERVER_IP + "**\nversion = **1.21**\nseed = **[REDACTED]**");
                 break;
             case "!gay":
                 if (args.length > 1) {
